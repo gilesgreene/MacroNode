@@ -4,12 +4,19 @@ import React from 'react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { useMacroNews, NewsArticle } from '@/hooks/useMacroNews';
-import { Newspaper, ExternalLink, TrendingUp, TrendingDown, Clock, RefreshCw } from 'lucide-react';
+import { Newspaper, ExternalLink, TrendingUp, TrendingDown, Clock, RefreshCw, Filter } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+const TOPICS = [
+  { id: 'economy_macro', label: 'All Macro' },
+  { id: 'finance', label: 'Finance' },
+  { id: 'retail_wholesale', label: 'Retail' },
+  { id: 'energy_transportation', label: 'Energy' },
+];
 
 interface NewsCardProps {
   article: NewsArticle;
@@ -75,7 +82,7 @@ interface SidePanelProps {
 }
 
 export default function SidePanel({ isOpen }: SidePanelProps) {
-  const { articles, loading, error, refresh } = useMacroNews();
+  const { articles, loading, error, topic, setTopic, refresh } = useMacroNews();
 
   if (!isOpen) return null;
 
@@ -95,6 +102,30 @@ export default function SidePanel({ isOpen }: SidePanelProps) {
         >
           <RefreshCw size={16} className={cn(loading && "animate-spin")} />
         </button>
+      </div>
+
+      {/* Filter Chips */}
+      <div className="px-4 py-3 border-b border-[#E5E7EB] bg-surface-page/50 shrink-0">
+        <div className="flex items-center gap-2 mb-2">
+          <Filter size={12} className="text-text-tertiary" />
+          <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Filter by Topic</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {TOPICS.map(t => (
+            <button
+              key={t.id}
+              onClick={() => setTopic(t.id)}
+              className={cn(
+                "px-2.5 py-1 rounded-full text-[10px] font-medium transition-all border",
+                topic === t.id 
+                  ? "bg-accent-primary text-white border-accent-primary shadow-sm" 
+                  : "bg-surface-card text-text-secondary border-[#E5E7EB] hover:border-accent-primary/50"
+              )}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Content */}
@@ -119,7 +150,7 @@ export default function SidePanel({ isOpen }: SidePanelProps) {
           </div>
         ) : articles.length === 0 ? (
           <div className="p-8 text-center text-text-tertiary text-xs italic">
-            No recent macro news found.
+            No recent articles found for this topic.
           </div>
         ) : (
           articles.map((article, idx) => (

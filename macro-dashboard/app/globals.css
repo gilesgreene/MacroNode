@@ -2,13 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light Mode */
+  --surface-page: #f8fafc;
+  --surface-card: #ffffff;
+  --surface-nav: #ffffff;
+  --surface-panel: #ffffff;
+  --surface-input: #f9fafb;
+  --surface-hover: #f1f5f9;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --text-muted: #cbd5e1;
+  
+  --accent-primary: #185fa5;
+  
+  --semantic-positive: #10b981;
+  --semantic-negative: #ef4444;
+  --semantic-neutral: #9ca3af;
+  --semantic-target: #9ca3af;
+  --semantic-band: #f0fdf4;
+
+  --tag-inflation-bg: #faece7; --tag-inflation-text: #712b13;
+  --tag-gdp-bg: #e1f5ee; --tag-gdp-text: #085041;
+  --tag-unemployment-bg: #faeeda; --tag-unemployment-text: #633806;
+  --tag-yields-bg: #e6f1fb; --tag-yields-text: #0c447c;
+  --tag-payrolls-bg: #eeedfe; --tag-payrolls-text: #3c3489;
+  --tag-general-bg: #f1efe8; --tag-general-text: #444441;
+}
+
+.dark {
+  /* Dark Mode */
+  --surface-page: #020617;
+  --surface-card: #0f172a;
+  --surface-nav: #1e293b;
+  --surface-panel: #0f172a;
+  --surface-input: #1e293b;
+  --surface-hover: #334155;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-muted: #334155;
+  
+  --accent-primary: #3b82f6;
+  
+  --semantic-positive: #34d399;
+  --semantic-negative: #f87171;
+  --semantic-neutral: #475569;
+  --semantic-target: #475569;
+  --semantic-band: #064e3b;
+
+  --tag-inflation-bg: #451a03; --tag-inflation-text: #fdba74;
+  --tag-gdp-bg: #064e3b; --tag-gdp-text: #6ee7b7;
+  --tag-unemployment-bg: #451a03; --tag-unemployment-text: #fcd34d;
+  --tag-yields-bg: #1e3a8a; --tag-yields-text: #93c5fd;
+  --tag-payrolls-bg: #312e81; --tag-payrolls-text: #c7d2fe;
+  --tag-general-bg: #334155; --tag-general-text: #cbd5e1;
+}
+
 body {
-  @apply bg-surface-page text-text-primary;
+  @apply bg-surface-page text-text-primary transition-colors duration-300;
 }
 
 @layer components {
   .card {
-    @apply bg-surface-card border-card border-[#E5E7EB] rounded-card p-[14px];
+    @apply bg-surface-card border-card border-[#E5E7EB] dark:border-white/10 rounded-card p-[14px];
   }
 }
 
@@ -22,12 +82,4 @@ svg *,
   outline: none !important;
   box-shadow: none !important;
   -webkit-tap-highlight-color: transparent !important;
-}
-
-.recharts-wrapper:focus,
-.recharts-surface:focus,
-.recharts-container:focus,
-svg:focus {
-  outline: none !important;
-  box-shadow: none !important;
 }

@@ -15,7 +15,8 @@ export interface NewsArticle {
   overall_sentiment_label: string;
 }
 
-export function useMacroNews(topic: string = 'economy_macro') {
+export function useMacroNews(initialTopic: string = 'economy_macro') {
+  const [topic, setTopic] = useState(initialTopic);
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,5 +68,5 @@ export function useMacroNews(topic: string = 'economy_macro') {
     fetchNews();
   }, [fetchNews]);
 
-  return { articles, loading, error, refresh: () => fetchNews(true) };
+  return { articles, loading, error, topic, setTopic, refresh: () => fetchNews(true) };
 }

@@ -10,54 +10,36 @@ const config: Config = {
     extend: {
       colors: {
         surface: {
-          page: "#F3F4F6",      // Original light gray
-          card: "#FFFFFF",      // White cards
-          nav: "#FFFFFF",       // White nav
-          panel: "#FFFFFF",     // White panel
-          input: "#F9FAFB",     // Light input
-          hover: "#F3F4F6",     // Hover state
+          page: "var(--surface-page)",
+          card: "var(--surface-card)",
+          nav: "var(--surface-nav)",
+          panel: "var(--surface-panel)",
+          input: "var(--surface-input)",
+          hover: "var(--surface-hover)",
         },
         text: {
-          primary: "#111827",   // Dark text
-          secondary: "#374151", // Gray text
-          tertiary: "#6B7280",  // Muted gray
-          muted: "#9CA3AF",     // Muted
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          tertiary: "var(--text-tertiary)",
+          muted: "var(--text-muted)",
         },
         accent: {
-          primary: "#185FA5",   // Original blue
+          primary: "var(--accent-primary)",
         },
         semantic: {
-          positive: "#1D9E75",
-          negative: "#E24B4A",
-          neutral: "#9CA3AF",
-          target: "#9CA3AF",
-          band: "#F0FDF4",
+          positive: "var(--semantic-positive)",
+          negative: "var(--semantic-negative)",
+          neutral: "var(--semantic-neutral)",
+          target: "var(--semantic-target)",
+          band: "var(--semantic-band)",
         },
         tag: {
-          inflation: {
-            bg: "#FAECE7",
-            text: "#712B13",
-          },
-          gdp: {
-            bg: "#E1F5EE",
-            text: "#085041",
-          },
-          unemployment: {
-            bg: "#FAEEDA",
-            text: "#633806",
-          },
-          yields: {
-            bg: "#E6F1FB",
-            text: "#0C447C",
-          },
-          payrolls: {
-            bg: "#EEEDFE",
-            text: "#3C3489",
-          },
-          general: {
-            bg: "#F1EFE8",
-            text: "#444441",
-          },
+          inflation: { bg: "var(--tag-inflation-bg)", text: "var(--tag-inflation-text)" },
+          gdp: { bg: "var(--tag-gdp-bg)", text: "var(--tag-gdp-text)" },
+          unemployment: { bg: "var(--tag-unemployment-bg)", text: "var(--tag-unemployment-text)" },
+          yields: { bg: "var(--tag-yields-bg)", text: "var(--tag-yields-text)" },
+          payrolls: { bg: "var(--tag-payrolls-bg)", text: "var(--tag-payrolls-text)" },
+          general: { bg: "var(--tag-general-bg)", text: "var(--tag-general-text)" },
         },
       },
       fontSize: {

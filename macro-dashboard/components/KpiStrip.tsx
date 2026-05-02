@@ -81,17 +81,18 @@ interface KpiStripProps {
 
 export default function KpiStrip({ items }: KpiStripProps) {
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex gap-2 w-full overflow-x-auto no-scrollbar pb-2 md:pb-0 shrink-0">
       {items.map((item) => (
-        <KpiCard
-          key={item.tag}
-          label={item.label}
-          tag={item.tag}
-          data={item.data}
-          loading={item.loading}
-          unit={item.unit}
-          isDelayed={item.isDelayed}
-        />
+        <div key={item.tag} className="min-w-[160px] md:min-w-0 md:flex-1">
+          <KpiCard
+            label={item.label}
+            tag={item.tag}
+            data={item.data}
+            loading={item.loading}
+            unit={item.unit}
+            isDelayed={item.isDelayed}
+          />
+        </div>
       ))}
     </div>
   );
