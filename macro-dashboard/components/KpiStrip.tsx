@@ -96,7 +96,7 @@ export default function KpiStrip({ items, selectedTag, onSelectTag }: KpiStripPr
           unit={item.unit}
           isDelayed={item.isDelayed}
           isSelected={selectedTag === item.tag}
-          onClick={() => onSelectTag(item.tag)}
+          onClick={() => onSelectTag?.(item.tag)}
         />
       ))}
     </div>
