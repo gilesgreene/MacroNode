@@ -19,7 +19,18 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => {
+        const next = theme === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        // Manual override to ensure the browser sees the change
+        if (next === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }}
       className="p-2 rounded-md hover:bg-surface-hover transition-colors text-text-tertiary hover:text-accent-primary"
       aria-label="Toggle Theme"
     >

@@ -2,13 +2,13 @@
 
 import { useState, useMemo } from 'react';
 import { useEconomicData } from '@/hooks/useEconomicData';
-import { 
-  toYoY, 
-  toMonthlyChange, 
-  toQtrGrowth, 
-  resampleToMonthlyAvg, 
-  sliceByRange, 
-  latestDelta 
+import {
+  toYoY,
+  toMonthlyChange,
+  toQtrGrowth,
+  resampleToMonthlyAvg,
+  sliceByRange,
+  latestDelta
 } from '@/lib/transforms';
 import { IndicatorTag } from '@/lib/types';
 import KpiStrip from '@/components/KpiStrip';
@@ -85,11 +85,11 @@ export default function Dashboard() {
             <Link href="/calendar" className="text-[13px] font-medium text-text-tertiary hover:text-text-primary transition-colors pb-1">Calendar</Link>
           </nav>
         </div>
-        
+
         <div className="flex items-center gap-1">
           <ThemeToggle />
           {/* News Toggle (Mobile Only) */}
-          <button 
+          <button
             onClick={() => setShowNews(!showNews)}
             className="lg:hidden p-2 text-text-tertiary hover:text-accent-primary transition-colors"
           >
@@ -104,8 +104,8 @@ export default function Dashboard() {
           <KpiStrip items={kpiItems} />
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <ChartCard 
-              title="CPI Inflation" 
+            <ChartCard
+              title="CPI Inflation"
               subtitle="Year-over-year % change in Consumer Price Index"
               timeframe={timeframes.inflation}
               onTimeframeChange={(r) => handleTimeframeChange('inflation', r)}
@@ -115,8 +115,8 @@ export default function Dashboard() {
               <CpiChart data={sliceByRange(cpiProcessed, timeframes.inflation)} />
             </ChartCard>
 
-            <ChartCard 
-              title="Nonfarm Payrolls" 
+            <ChartCard
+              title="Nonfarm Payrolls"
               subtitle="Monthly change in employment (K)"
               timeframe={timeframes.payrolls}
               onTimeframeChange={(r) => handleTimeframeChange('payrolls', r)}
@@ -126,8 +126,8 @@ export default function Dashboard() {
               <PayrollChart data={sliceByRange(payrollsProcessed, timeframes.payrolls)} />
             </ChartCard>
 
-            <ChartCard 
-              title="Unemployment Rate" 
+            <ChartCard
+              title="Unemployment Rate"
               subtitle="Percentage of labor force unemployed"
               timeframe={timeframes.unemployment}
               onTimeframeChange={(r) => handleTimeframeChange('unemployment', r)}
@@ -137,8 +137,8 @@ export default function Dashboard() {
               <UnemploymentChart data={sliceByRange(unemploymentProcessed, timeframes.unemployment)} />
             </ChartCard>
 
-            <ChartCard 
-              title="Real GDP Growth" 
+            <ChartCard
+              title="Real GDP Growth"
               subtitle="Quarterly annualized % change"
               timeframe={timeframes.gdp}
               onTimeframeChange={(r) => handleTimeframeChange('gdp', r)}
@@ -148,17 +148,17 @@ export default function Dashboard() {
               <GdpChart data={sliceByRange(gdpProcessed, timeframes.gdp)} />
             </ChartCard>
 
-            <ChartCard 
-              title="Yield Curve (10Y vs 2Y)" 
+            <ChartCard
+              title="Yield Curve (10Y vs 2Y)"
               subtitle="Treasury Constant Maturity Rates"
               timeframe={timeframes.yields}
               onTimeframeChange={(r) => handleTimeframeChange('yields', r)}
               loading={yields10y.loading || yields2y.loading}
               error={yields10y.error || yields2y.error}
             >
-              <YieldChart 
-                data10Y={sliceByRange(yields10yProcessed, timeframes.yields)} 
-                data2Y={sliceByRange(yields2yProcessed, timeframes.yields)} 
+              <YieldChart
+                data10Y={sliceByRange(yields10yProcessed, timeframes.yields)}
+                data2Y={sliceByRange(yields2yProcessed, timeframes.yields)}
               />
             </ChartCard>
           </div>
@@ -169,15 +169,15 @@ export default function Dashboard() {
           "absolute lg:relative inset-y-0 right-0 z-20 transform transition-transform duration-300 ease-in-out lg:translate-x-0",
           showNews ? "translate-x-0" : "translate-x-full"
         )}>
-          <SidePanel 
-            isOpen={true} 
+          <SidePanel
+            isOpen={true}
             onClose={() => setShowNews(false)}
           />
         </div>
 
         {/* Backdrop for Mobile News */}
         {showNews && (
-          <div 
+          <div
             className="absolute inset-0 bg-black/20 z-10 lg:hidden"
             onClick={() => setShowNews(false)}
           />

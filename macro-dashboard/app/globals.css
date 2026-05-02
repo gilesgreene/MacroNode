@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Light Mode */
+/* Light Mode Base */
+html {
   --surface-page: #f8fafc;
   --surface-card: #ffffff;
   --surface-nav: #ffffff;
@@ -32,43 +32,46 @@
   --tag-general-bg: #f1efe8; --tag-general-text: #444441;
 }
 
-.dark {
-  /* Dark Mode */
-  --surface-page: #020617;
-  --surface-card: #0f172a;
-  --surface-nav: #1e293b;
-  --surface-panel: #0f172a;
-  --surface-input: #1e293b;
-  --surface-hover: #334155;
+/* Dark Mode - Explicit HTML Selector */
+html[data-theme='dark'],
+html.dark {
+  --surface-page: #020617 !important;
+  --surface-card: #0f172a !important;
+  --surface-nav: #1e293b !important;
+  --surface-panel: #0f172a !important;
+  --surface-input: #1e293b !important;
+  --surface-hover: #334155 !important;
   
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #64748b;
-  --text-muted: #334155;
+  --text-primary: #f8fafc !important;
+  --text-secondary: #94a3b8 !important;
+  --text-tertiary: #64748b !important;
+  --text-muted: #334155 !important;
   
-  --accent-primary: #3b82f6;
+  --accent-primary: #3b82f6 !important;
   
-  --semantic-positive: #34d399;
-  --semantic-negative: #f87171;
-  --semantic-neutral: #475569;
-  --semantic-target: #475569;
-  --semantic-band: #064e3b;
+  --semantic-positive: #34d399 !important;
+  --semantic-negative: #f87171 !important;
+  --semantic-neutral: #475569 !important;
+  --semantic-target: #475569 !important;
+  --semantic-band: #064e3b !important;
 
-  --tag-inflation-bg: #451a03; --tag-inflation-text: #fdba74;
-  --tag-gdp-bg: #064e3b; --tag-gdp-text: #6ee7b7;
-  --tag-unemployment-bg: #451a03; --tag-unemployment-text: #fcd34d;
-  --tag-yields-bg: #1e3a8a; --tag-yields-text: #93c5fd;
-  --tag-payrolls-bg: #312e81; --tag-payrolls-text: #c7d2fe;
-  --tag-general-bg: #334155; --tag-general-text: #cbd5e1;
+  --tag-inflation-bg: #451a03 !important; --tag-inflation-text: #fdba74 !important;
+  --tag-gdp-bg: #064e3b !important; --tag-gdp-text: #6ee7b7 !important;
+  --tag-unemployment-bg: #451a03 !important; --tag-unemployment-text: #fcd34d !important;
+  --tag-yields-bg: #1e3a8a !important; --tag-yields-text: #93c5fd !important;
+  --tag-payrolls-bg: #312e81 !important; --tag-payrolls-text: #c7d2fe !important;
+  --tag-general-bg: #334155 !important; --tag-general-text: #cbd5e1 !important;
 }
 
 body {
-  @apply bg-surface-page text-text-primary transition-colors duration-300;
+  background-color: var(--surface-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer components {
   .card {
-    @apply bg-surface-card border-card border-[#E5E7EB] dark:border-white/10 rounded-card p-[14px];
+    @apply bg-surface-card border-[#E5E7EB] dark:border-white/10 rounded-card p-[14px];
   }
 }
 

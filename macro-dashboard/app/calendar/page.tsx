@@ -138,8 +138,8 @@ export default function CalendarPage() {
           <div className="p-4 md:p-8 border-b border-[#E5E7EB] dark:border-white/10 bg-surface-card/30">
             <div className="max-w-4xl">
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-accent-primary/10 rounded-lg">
-                  <CalendarIcon className="text-accent-primary" size={20} />
+                <div className="p-2 bg-accent-primary/10 dark:bg-white/10 rounded-lg border border-transparent dark:border-white/5">
+                  <CalendarIcon className="calendar-logo-icon text-accent-primary" size={20} />
                 </div>
                 <h2 className="text-xl md:text-2xl font-bold text-text-primary tracking-tight">Economic Calendar</h2>
               </div>
@@ -153,7 +153,7 @@ export default function CalendarPage() {
           <div className="max-w-5xl mx-auto py-4 md:py-6 px-4 md:px-8">
             <div className="bg-surface-card border border-[#E5E7EB] dark:border-white/10 rounded-card shadow-sm overflow-hidden">
               <div className="bg-[#F8FAFC] dark:bg-black/20 px-4 py-2 border-b border-[#E5E7EB] dark:border-white/5 flex justify-between items-center">
-                <span className="text-[10px] font-bold text-text-tertiary uppercase tracking-widest">Global Data Releases (Next 30 Days)</span>
+                <span className="text-[10px] font-bold text-[#020617] uppercase tracking-widest">Global Data Releases (Next 30 Days)</span>
               </div>
               
               <div className="divide-y divide-[#F1F5F9] dark:divide-white/5">

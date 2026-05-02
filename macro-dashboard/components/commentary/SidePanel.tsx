@@ -91,7 +91,9 @@ export default function SidePanel({ isOpen }: SidePanelProps) {
       {/* Header */}
       <div className="h-12 px-4 border-b border-[#E5E7EB] flex items-center justify-between bg-surface-nav shrink-0">
         <div className="flex items-center gap-2">
-          <Newspaper size={18} className="text-accent-primary" />
+          <div className="p-1.5 bg-accent-primary/10 dark:bg-[#020617] rounded-md border border-transparent dark:border-white/10">
+            <Newspaper size={18} className="news-logo-icon text-accent-primary" />
+          </div>
           <h2 className="text-sm font-semibold text-text-primary uppercase tracking-wider">Macro News</h2>
         </div>
         <button 
