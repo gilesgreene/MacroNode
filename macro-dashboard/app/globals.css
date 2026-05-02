@@ -11,3 +11,23 @@ body {
     @apply bg-surface-card border-card border-[#E5E7EB] rounded-card p-[14px];
   }
 }
+
+/* Global Fix for Recharts Focus Outlines */
+.recharts-wrapper, 
+.recharts-surface,
+.recharts-container,
+svg,
+svg *,
+.recharts-wrapper *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+.recharts-container:focus,
+svg:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

@@ -50,18 +50,18 @@ def get_prediction(series_id):
     df = get_fred_data(series_id)
     
     # Outlier detection and clipping (especially for 2020 shocks)
-    # Clip values beyond 3 std devs to prevent trend bias
     mean = df['y'].mean()
     std = df['y'].std()
     df['y'] = df['y'].clip(lower=mean - 4*std, upper=mean + 4*std)
     
     # Initialize and fit model
-    # changepoint_prior_scale: higher = more flexible trend
-    # seasonality_prior_scale: higher = more flexible seasonality
+    # changepoint_prior_scale: 0.15 allows for smoother, more frequent trend pivots
+    # n_changepoints: 30 gives more granularity for recent shocks
     model = Prophet(
         yearly_seasonality=True, 
         interval_width=0.8,
-        changepoint_prior_scale=0.05,
+        changepoint_prior_scale=0.15,
+        n_changepoints=30,
         seasonality_prior_scale=10.0
     )
     model.fit(df)
@@ -72,8 +72,6 @@ def get_prediction(series_id):
     # Predict
     forecast = model.predict(future)
     
-    # Return both historical and forecast
-    # We'll return the last few years of historical + the future
     historical_count = min(len(df), 60) # Last 5 years
     result = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(historical_count + 12)
     
@@ -83,20 +81,25 @@ def get_prediction(series_id):
     # Convert dates to strings for JSON serialization
     result['ds'] = result['ds'].dt.strftime('%Y-%m-%d')
     
-    # Robustly handle NaN values (convert to None/null for JSON)
-    # Using a list comprehension to ensure pure Python types
+    # Robustly handle NaN values
     data = result.to_dict(orient='records')
     for row in data:
         for k, v in row.items():
             if pd.isna(v):
                 row[k] = None
                 
-    # Calculate Accuracy (MAPE) on historical data
-    # Compare 'y' (actual) with 'yhat' (prediction) for historical points
+    # Calculate Accuracy (Refined: MAE vs Data Range)
+    # This is much more representative for small percentage values (GDP/CPI)
     historical_data = result.dropna(subset=['y'])
-    if len(historical_data) > 0:
-        mape = (abs(historical_data['y'] - historical_data['yhat']) / historical_data['y'].abs()).mean()
-        accuracy = max(0, 100 - (mape * 100))
+    if len(historical_data) > 1:
+        mae = (historical_data['y'] - historical_data['yhat']).abs().mean()
+        data_range = historical_data['y'].max() - historical_data['y'].min()
+        
+        if data_range > 0:
+            # Accuracy is 1 - normalized error
+            accuracy = max(0, min(100, 100 * (1 - (mae / data_range))))
+        else:
+            accuracy = 95.0 # Fallback
     else:
         accuracy = 0
 

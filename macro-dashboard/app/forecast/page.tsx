@@ -142,7 +142,7 @@ export default function ForecastPage() {
           </div>
 
           {/* Chart Section */}
-          <div className="bg-surface-card border border-[#E5E7EB] rounded-card p-6 h-[480px] relative shadow-sm">
+          <div className="bg-surface-card border border-[#E5E7EB] rounded-card p-6 h-[480px] relative shadow-sm outline-none" tabIndex={-1}>
             {loading ? (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                 <Loader2 className="animate-spin text-accent-primary" size={28} />

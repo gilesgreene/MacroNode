@@ -28,7 +28,7 @@ export default function ChartCard({
   children,
 }: Omit<ChartCardProps, 'onAddNote'>) {
   return (
-    <div className="card flex flex-col h-[340px] gap-4">
+    <div className="card h-[380px] flex flex-col shadow-sm hover:shadow-md transition-shadow focus:outline-none select-none">
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-section text-text-primary">{title}</h3>

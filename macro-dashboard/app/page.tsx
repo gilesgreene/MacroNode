@@ -19,17 +19,11 @@ import UnemploymentChart from '@/components/charts/UnemploymentChart';
 import GdpChart from '@/components/charts/GdpChart';
 import YieldChart from '@/components/charts/YieldChart';
 import SidePanel from '@/components/commentary/SidePanel';
-import ReportModal from '@/components/commentary/ReportModal';
-import { useNotes } from '@/hooks/useNotes';
-import { MessageSquare } from 'lucide-react';
-import { Note } from '@/lib/types';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Dashboard() {
   // State
-  const [selectedTag, setSelectedTag] = useState<IndicatorTag | null>(null);
-  const [activeReport, setActiveReport] = useState<Note | null>(null);
   const [timeframes, setTimeframes] = useState<Record<string, '1Y' | '5Y' | '10Y'>>({
     inflation: '5Y',
     payrolls: '5Y',
@@ -37,9 +31,6 @@ export default function Dashboard() {
     gdp: '5Y',
     yields: '5Y',
   });
-
-  // Notes Hook
-  const { notes, addNote, deleteNote } = useNotes();
 
   // Fetch Data
   const cpi = useEconomicData('CPIAUCSL', 'fred');
@@ -92,10 +83,6 @@ export default function Dashboard() {
     },
   ];
 
-  const handleSelectTag = (tag: IndicatorTag) => {
-    setSelectedTag(tag);
-  };
-
   const handleTimeframeChange = (id: string, range: '1Y' | '5Y' | '10Y') => {
     setTimeframes(prev => ({ ...prev, [id]: range }));
   };
@@ -122,9 +109,7 @@ export default function Dashboard() {
       <div className="flex flex-1 overflow-hidden">
         {/* Main Content */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          <KpiStrip 
-            items={kpiItems} 
-          />
+          <KpiStrip items={kpiItems} />
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             <ChartCard 
@@ -187,23 +172,12 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Side Panel */}
+        {/* Side Panel (Now Live News) */}
         <SidePanel 
           isOpen={true} 
           onClose={() => {}}
-          notes={notes}
-          onAddNote={addNote}
-          onDeleteNote={deleteNote}
-          onNoteClick={(note) => setActiveReport(note)}
-          selectedTag={selectedTag}
         />
       </div>
-
-      {/* Report View Modal */}
-      <ReportModal 
-        report={activeReport} 
-        onClose={() => setActiveReport(null)} 
-      />
     </main>
   );
 }

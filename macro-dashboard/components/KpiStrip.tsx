@@ -13,14 +13,12 @@ interface KpiCardProps {
   label: string;
   data: KpiData | null;
   tag: IndicatorTag;
-  isSelected?: boolean;
-  onClick: () => void;
   loading?: boolean;
   unit?: string;
   isDelayed?: boolean;
 }
 
-function KpiCard({ label, data, tag, isSelected, onClick, loading, unit = '%', isDelayed }: KpiCardProps) {
+function KpiCard({ label, data, tag, loading, unit = '%', isDelayed }: KpiCardProps) {
   const directionColor = data?.direction === 'up' ? 'text-semantic-positive' : 
                          data?.direction === 'down' ? 'text-semantic-negative' : 
                          'text-semantic-neutral';
@@ -32,7 +30,7 @@ function KpiCard({ label, data, tag, isSelected, onClick, loading, unit = '%', i
   return (
     <div 
       className={cn(
-        "flex-1 bg-surface-card border border-[#E5E7EB] rounded-card p-3 transition-all duration-200 ease-in-out",
+        "flex-1 bg-surface-card border border-[#E5E7EB] rounded-card p-3 transition-all duration-200 ease-in-out select-none",
         "hover:scale-[1.02] hover:shadow-sm"
       )}
     >
@@ -79,11 +77,9 @@ interface KpiStripProps {
     unit?: string;
     isDelayed?: boolean;
   }[];
-  selectedTag?: IndicatorTag | null;
-  onSelectTag?: (tag: IndicatorTag) => void;
 }
 
-export default function KpiStrip({ items, selectedTag, onSelectTag }: KpiStripProps) {
+export default function KpiStrip({ items }: KpiStripProps) {
   return (
     <div className="flex gap-2 w-full">
       {items.map((item) => (
@@ -95,8 +91,6 @@ export default function KpiStrip({ items, selectedTag, onSelectTag }: KpiStripPr
           loading={item.loading}
           unit={item.unit}
           isDelayed={item.isDelayed}
-          isSelected={selectedTag === item.tag}
-          onClick={() => onSelectTag?.(item.tag)}
         />
       ))}
     </div>
