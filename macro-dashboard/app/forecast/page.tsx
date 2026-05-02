@@ -204,15 +204,27 @@ export default function ForecastPage() {
                         tickFormatter={(val) => `${val}${seriesId === 'CES0000000001' ? 'K' : '%'}`}
                       />
                       <Tooltip 
-                        contentStyle={{ backgroundColor: '#ffffff', borderRadius: '8px', border: '1px solid #E5E7EB', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                        contentStyle={{ 
+                          backgroundColor: 'var(--surface-card)', 
+                          borderRadius: '8px', 
+                          border: '1px solid var(--text-muted)', 
+                          boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                          fontSize: '12px'
+                        }}
+                        itemStyle={{ color: 'var(--text-primary)' }}
+                        labelStyle={{ color: 'var(--text-secondary)', fontWeight: 'bold', marginBottom: '4px' }}
                         labelFormatter={(label) => format(parseISO(label), 'MMMM yyyy')}
-                        formatter={(value: number, name: string) => [
-                          value.toFixed(2), 
-                          name === 'yhat' ? 'Prediction' : 
-                          name === 'y' ? 'Actual' : 
-                          name === 'yhat_upper' ? 'Upper Bound' : 
-                          name === 'yhat_lower' ? 'Lower Bound' : name
-                        ]}
+                        formatter={(value: any, name: string) => {
+                          if (value === null || value === undefined) return ['--', name];
+                          const val = typeof value === 'number' ? value : parseFloat(value);
+                          return [
+                            val.toFixed(2), 
+                            name === 'yhat' ? 'Prediction' : 
+                            name === 'y' ? 'Actual' : 
+                            name === 'yhat_upper' ? 'Upper Bound' : 
+                            name === 'yhat_lower' ? 'Lower Bound' : name
+                          ];
+                        }}
                       />
                       
                       {/* Confidence Interval Band */}
