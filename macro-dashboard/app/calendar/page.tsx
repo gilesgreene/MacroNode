@@ -153,7 +153,7 @@ export default function CalendarPage() {
           <div className="max-w-5xl mx-auto py-4 md:py-6 px-4 md:px-8">
             <div className="bg-surface-card border border-[#E5E7EB] dark:border-white/10 rounded-card shadow-sm overflow-hidden">
               <div className="bg-[#F8FAFC] dark:bg-black/20 px-4 py-2 border-b border-[#E5E7EB] dark:border-white/5 flex justify-between items-center">
-                <span className="text-[10px] font-bold text-[#020617] uppercase tracking-widest">Global Data Releases (Next 30 Days)</span>
+                <span className="text-[10px] font-bold text-[#ffffff] uppercase tracking-widest">Global Data Releases (Next 30 Days)</span>
               </div>
               
               <div className="divide-y divide-[#F1F5F9] dark:divide-white/5">
