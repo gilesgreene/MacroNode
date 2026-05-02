@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { useMacroNews, NewsArticle } from '@/hooks/useMacroNews';
@@ -51,10 +52,13 @@ function NewsCard({ article }: NewsCardProps) {
           </h3>
         </div>
         {article.banner_image && (
-          <img 
+          <Image 
             src={article.banner_image} 
             alt="" 
+            width={64}
+            height={64}
             className="w-16 h-16 rounded-md object-cover border border-[#F1F5F9] shrink-0" 
+            unoptimized
           />
         )}
       </div>

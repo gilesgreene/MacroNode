@@ -272,12 +272,12 @@ export default function ForecastPage() {
                 </div>
                 <div className="space-y-4">
                   <p className="text-[13px] text-text-secondary leading-relaxed font-light">
-                    The MacroNode Prediction Engine utilizes <span className="font-semibold text-text-primary">Meta's Prophet Engine</span>, an additive model designed for forecasting time-series data where non-linear trends are fit with yearly, weekly, and daily seasonality.
+                    The MacroNode Prediction Engine utilizes <span className="font-semibold text-text-primary">Meta&apos;s Prophet Engine</span>, an additive model designed for forecasting time-series data where non-linear trends are fit with yearly, weekly, and daily seasonality.
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-3 bg-surface-page rounded-lg border border-[#F1F5F9]">
                       <h4 className="text-[11px] font-bold text-text-primary uppercase mb-1">Growth Trend</h4>
-                      <p className="text-[11px] text-text-tertiary">Fits piecewise linear or logistic growth curves, automatically detecting "changepoints" in economic momentum.</p>
+                      <p className="text-[11px] text-text-tertiary">Fits piecewise linear or logistic growth curves, automatically detecting &quot;changepoints&quot; in economic momentum.</p>
                     </div>
                     <div className="p-3 bg-surface-page rounded-lg border border-[#F1F5F9]">
                       <h4 className="text-[11px] font-bold text-text-primary uppercase mb-1">Seasonality</h4>

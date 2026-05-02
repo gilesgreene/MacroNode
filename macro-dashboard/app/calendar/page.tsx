@@ -181,7 +181,7 @@ export default function CalendarPage() {
             <div className="mt-6 p-4 bg-[#F8FAFC] dark:bg-black/20 border border-[#E5E7EB] dark:border-white/10 rounded-lg flex items-start gap-3">
               <Info size={16} className="text-accent-primary shrink-0 mt-0.5" />
               <p className="text-[10px] md:text-[11px] text-text-secondary leading-relaxed">
-                Releases are pulled in real-time from FMP. "Estimate" represents the market consensus, and "Actual" will update automatically as numbers are published by reporting agencies.
+                Releases are pulled in real-time from FMP. &quot;Estimate&quot; represents the market consensus, and &quot;Actual&quot; will update automatically as numbers are published by reporting agencies.
               </p>
             </div>
           </div>
