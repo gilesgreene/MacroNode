@@ -123,7 +123,6 @@ export default function Dashboard() {
               subtitle="Year-over-year % change in Consumer Price Index"
               timeframe={timeframes.inflation}
               onTimeframeChange={(r) => handleTimeframeChange('inflation', r)}
-              onAddNote={() => handleSelectTag('Inflation')}
               loading={cpi.loading}
               error={cpi.error}
             >
@@ -135,7 +134,6 @@ export default function Dashboard() {
               subtitle="Monthly change in total nonfarm employment (thousands)"
               timeframe={timeframes.payrolls}
               onTimeframeChange={(r) => handleTimeframeChange('payrolls', r)}
-              onAddNote={() => handleSelectTag('Payrolls')}
               loading={payrolls.loading}
               error={payrolls.error}
             >
@@ -147,7 +145,6 @@ export default function Dashboard() {
               subtitle="Percentage of the labor force that is unemployed"
               timeframe={timeframes.unemployment}
               onTimeframeChange={(r) => handleTimeframeChange('unemployment', r)}
-              onAddNote={() => handleSelectTag('Unemployment')}
               loading={unemployment.loading}
               error={unemployment.error}
             >
@@ -159,7 +156,6 @@ export default function Dashboard() {
               subtitle="Quarterly annualized % change in Real GDP"
               timeframe={timeframes.gdp}
               onTimeframeChange={(r) => handleTimeframeChange('gdp', r)}
-              onAddNote={() => handleSelectTag('GDP')}
               loading={gdp.loading}
               error={gdp.error}
             >
@@ -171,7 +167,6 @@ export default function Dashboard() {
               subtitle="10-Year and 2-Year Treasury Constant Maturity Rates"
               timeframe={timeframes.yields}
               onTimeframeChange={(r) => handleTimeframeChange('yields', r)}
-              onAddNote={() => handleSelectTag('Yields')}
               loading={yields10y.loading || yields2y.loading}
               error={yields10y.error || yields2y.error}
             >

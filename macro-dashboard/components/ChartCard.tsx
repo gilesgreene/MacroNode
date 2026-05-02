@@ -3,7 +3,6 @@
 import React from 'react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Plus } from 'lucide-react';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -14,7 +13,6 @@ interface ChartCardProps {
   subtitle?: string;
   timeframe: '1Y' | '5Y' | '10Y';
   onTimeframeChange: (range: '1Y' | '5Y' | '10Y') => void;
-  onAddNote: () => void;
   loading?: boolean;
   error?: string | null;
   children: React.ReactNode;
@@ -25,11 +23,10 @@ export default function ChartCard({
   subtitle,
   timeframe,
   onTimeframeChange,
-  onAddNote,
   loading,
   error,
   children,
-}: ChartCardProps) {
+}: Omit<ChartCardProps, 'onAddNote'>) {
   return (
     <div className="card flex flex-col h-[340px] gap-4">
       <div className="flex items-start justify-between">
@@ -55,13 +52,6 @@ export default function ChartCard({
               </button>
             ))}
           </div>
-          
-          <button 
-            onClick={onAddNote}
-            className="p-1.5 rounded-tab border border-[#E5E7EB] hover:bg-surface-hover transition-colors"
-          >
-            <Plus size={14} className="text-text-secondary" />
-          </button>
         </div>
       </div>
 
