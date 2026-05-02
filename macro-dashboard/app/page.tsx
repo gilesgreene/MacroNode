@@ -24,6 +24,7 @@ import { useNotes } from '@/hooks/useNotes';
 import { MessageSquare } from 'lucide-react';
 import { Note } from '@/lib/types';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Dashboard() {
   // State
@@ -105,7 +106,7 @@ export default function Dashboard() {
       <nav className="h-12 bg-surface-nav border-b border-[#E5E7EB] flex items-center justify-between px-4 shrink-0 z-10">
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
-            <img src="/macronode_favicon.svg" alt="MacroNode" className="w-6 h-6" />
+            <Image src="/macronode_favicon.svg" alt="MacroNode" width={24} height={24} />
             <h1 className="text-brand text-text-primary tracking-tight">MacroNode Dashboard</h1>
           </div>
           <nav className="flex gap-4">

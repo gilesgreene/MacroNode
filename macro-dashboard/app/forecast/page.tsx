@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Line, 
   XAxis, 
@@ -15,6 +15,7 @@ import {
 import { format, parseISO } from 'date-fns';
 import { Brain, ArrowLeft, Loader2, TrendingUp, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface ForecastPoint {
   ds: string;
@@ -33,29 +34,7 @@ export default function ForecastPage() {
   const [reasoning, setReasoning] = useState('');
   const [reasoningLoading, setReasoningLoading] = useState(false);
 
-  const fetchForecast = async (id: string) => {
-    try {
-      setLoading(true);
-      setError(null);
-      const res = await fetch(`/api/py/predict?series=${id}`);
-      const json = await res.json();
-      
-      if (json.status === 'success') {
-        setData(json.data.points);
-        setAccuracy(json.data.accuracy);
-        generateReasoning(id, json.data.points);
-      } else {
-        setError(json.message || 'Failed to fetch forecast');
-      }
-    } catch (e) {
-      setError('Connection to prediction engine failed');
-      console.error('Forecast fetch failed:', e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const generateReasoning = async (id: string, forecast: ForecastPoint[]) => {
+  const generateReasoning = useCallback(async (id: string, forecast: ForecastPoint[]) => {
     try {
       setReasoningLoading(true);
       const lastPoint = forecast[forecast.length - 1];
@@ -84,11 +63,33 @@ export default function ForecastPage() {
     } finally {
       setReasoningLoading(false);
     }
-  };
+  }, []);
+
+  const fetchForecast = useCallback(async (id: string) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch(`/api/py/predict?series=${id}`);
+      const json = await res.json();
+      
+      if (json.status === 'success') {
+        setData(json.data.points);
+        setAccuracy(json.data.accuracy);
+        generateReasoning(id, json.data.points);
+      } else {
+        setError(json.message || 'Failed to fetch forecast');
+      }
+    } catch (e) {
+      setError('Connection to prediction engine failed');
+      console.error('Forecast fetch failed:', e);
+    } finally {
+      setLoading(false);
+    }
+  }, [generateReasoning]);
 
   useEffect(() => {
     fetchForecast(seriesId);
-  }, [seriesId]);
+  }, [seriesId, fetchForecast]);
 
   const seriesOptions = [
     { id: 'CPIAUCSL', name: 'Consumer Price Index (CPI)' },
@@ -103,7 +104,7 @@ export default function ForecastPage() {
       <nav className="h-12 bg-surface-nav border-b border-[#E5E7EB] flex items-center justify-between px-4 shrink-0 z-10">
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-2">
-            <img src="/macronode_favicon.svg" alt="MacroNode" className="w-6 h-6" />
+            <Image src="/macronode_favicon.svg" alt="MacroNode" width={24} height={24} />
             <h1 className="text-brand text-text-primary tracking-tight">MacroNode Dashboard</h1>
           </div>
           <nav className="flex gap-4">

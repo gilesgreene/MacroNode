@@ -79,8 +79,8 @@ interface KpiStripProps {
     unit?: string;
     isDelayed?: boolean;
   }[];
-  selectedTag: IndicatorTag | null;
-  onSelectTag: (tag: IndicatorTag) => void;
+  selectedTag?: IndicatorTag | null;
+  onSelectTag?: (tag: IndicatorTag) => void;
 }
 
 export default function KpiStrip({ items, selectedTag, onSelectTag }: KpiStripProps) {

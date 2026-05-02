@@ -49,9 +49,21 @@ def get_prediction(series_id):
     # Fetch data
     df = get_fred_data(series_id)
     
+    # Outlier detection and clipping (especially for 2020 shocks)
+    # Clip values beyond 3 std devs to prevent trend bias
+    mean = df['y'].mean()
+    std = df['y'].std()
+    df['y'] = df['y'].clip(lower=mean - 4*std, upper=mean + 4*std)
+    
     # Initialize and fit model
-    # Yearly seasonality is important for macro data
-    model = Prophet(yearly_seasonality=True, interval_width=0.8)
+    # changepoint_prior_scale: higher = more flexible trend
+    # seasonality_prior_scale: higher = more flexible seasonality
+    model = Prophet(
+        yearly_seasonality=True, 
+        interval_width=0.8,
+        changepoint_prior_scale=0.05,
+        seasonality_prior_scale=10.0
+    )
     model.fit(df)
     
     # Create future dataframe (12 months)
