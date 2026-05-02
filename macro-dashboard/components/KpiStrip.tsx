@@ -31,11 +31,9 @@ function KpiCard({ label, data, tag, isSelected, onClick, loading, unit = '%', i
 
   return (
     <div 
-      onClick={onClick}
       className={cn(
-        "flex-1 bg-surface-card border-card rounded-card p-3 cursor-pointer transition-all",
-        "hover:border-[#D1D5DB]",
-        isSelected ? "border-[1.5px] border-accent-primary" : "border-[#E5E7EB]"
+        "flex-1 bg-surface-card border border-[#E5E7EB] rounded-card p-3 transition-all duration-200 ease-in-out",
+        "hover:scale-[1.02] hover:shadow-sm"
       )}
     >
       <div className="flex justify-between items-start mb-1">

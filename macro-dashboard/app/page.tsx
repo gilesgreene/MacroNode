@@ -23,6 +23,7 @@ import ReportModal from '@/components/commentary/ReportModal';
 import { useNotes } from '@/hooks/useNotes';
 import { MessageSquare } from 'lucide-react';
 import { Note } from '@/lib/types';
+import Link from 'next/link';
 
 export default function Dashboard() {
   // State
@@ -99,12 +100,21 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="flex flex-col h-screen bg-surface-page overflow-hidden">
+    <main className="flex flex-col h-screen bg-surface-page overflow-hidden font-sans">
       {/* Nav */}
       <nav className="h-12 bg-surface-nav border-b border-[#E5E7EB] flex items-center justify-between px-4 shrink-0 z-10">
-        <h1 className="text-brand text-text-primary">MacroNode Dashboard</h1>
-        <div className="text-[10px] text-text-tertiary font-medium uppercase tracking-widest">
-          Live Analysis Engine
+        <div className="flex items-center gap-8">
+          <div className="flex items-center gap-2">
+            <img src="/macronode_favicon.svg" alt="MacroNode" className="w-6 h-6" />
+            <h1 className="text-brand text-text-primary tracking-tight">MacroNode Dashboard</h1>
+          </div>
+          <nav className="flex gap-4">
+            <Link href="/" className="text-[13px] font-medium text-accent-primary border-b-2 border-accent-primary pb-1">Dashboard</Link>
+            <Link href="/forecast" className="text-[13px] font-medium text-text-tertiary hover:text-text-primary transition-colors pb-1">Forecasting</Link>
+          </nav>
+        </div>
+        <div className="text-[10px] text-text-tertiary font-medium uppercase tracking-[0.2em]">
+          Institutional Grade Engine
         </div>
       </nav>
 
@@ -113,8 +123,6 @@ export default function Dashboard() {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           <KpiStrip 
             items={kpiItems} 
-            selectedTag={selectedTag} 
-            onSelectTag={handleSelectTag} 
           />
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">

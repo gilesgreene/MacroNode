@@ -10,21 +10,21 @@ const config: Config = {
     extend: {
       colors: {
         surface: {
-          page: "#F3F4F6",
-          card: "#FFFFFF",
-          nav: "#FFFFFF",
-          panel: "#FFFFFF",
-          input: "#F9FAFB",
-          hover: "#F3F4F6",
+          page: "#F3F4F6",      // Original light gray
+          card: "#FFFFFF",      // White cards
+          nav: "#FFFFFF",       // White nav
+          panel: "#FFFFFF",     // White panel
+          input: "#F9FAFB",     // Light input
+          hover: "#F3F4F6",     // Hover state
         },
         text: {
-          primary: "#111827",
-          secondary: "#374151",
-          tertiary: "#6B7280",
-          muted: "#9CA3AF",
+          primary: "#111827",   // Dark text
+          secondary: "#374151", // Gray text
+          tertiary: "#6B7280",  // Muted gray
+          muted: "#9CA3AF",     // Muted
         },
         accent: {
-          primary: "#185FA5",
+          primary: "#185FA5",   // Original blue
         },
         semantic: {
           positive: "#1D9E75",

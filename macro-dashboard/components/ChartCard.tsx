@@ -36,7 +36,7 @@ export default function ChartCard({
         </div>
         
         <div className="flex items-center gap-3">
-          <div className="flex bg-surface-page p-0.5 rounded-tab">
+          <div className="flex bg-surface-page p-0.5 rounded-tab border border-[#E5E7EB]">
             {(['1Y', '5Y', '10Y'] as const).map((range) => (
               <button
                 key={range}
