@@ -5,8 +5,11 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Macro Economic Dashboard",
-  description: "Monitor US macroeconomic insights and commentary",
+  title: "MacroNode | Economic Insights",
+  description: "Aggregating FRED and BLS data for institutional-grade macroeconomic analysis.",
+  icons: {
+    icon: "/macronode_favicon.svg",
+  },
 };
 
 export default function RootLayout({
