@@ -214,7 +214,7 @@ export default function ForecastPage() {
                         itemStyle={{ color: 'var(--text-primary)' }}
                         labelStyle={{ color: 'var(--text-secondary)', fontWeight: 'bold', marginBottom: '4px' }}
                         labelFormatter={(label) => format(parseISO(label), 'MMMM yyyy')}
-                        formatter={(value: any, name: string) => {
+                        formatter={(value: any, name: any) => {
                           if (value === null || value === undefined) return ['--', name];
                           const val = typeof value === 'number' ? value : parseFloat(value);
                           return [
