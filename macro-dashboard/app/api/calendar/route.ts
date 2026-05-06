@@ -30,7 +30,7 @@ export async function GET() {
 
     // Filter for US events, map to our structure, and sort by date ascending
     const formattedEvents = data
-      .filter((e: any) => e.country === 'US' && (e.impact === 'High' || e.impact === 'Medium'))
+      .filter((e: any) => e.country === 'US')
       .map((e: any) => ({
         id: `${e.event}-${e.date}`,
         date: e.date.split(' ')[0],

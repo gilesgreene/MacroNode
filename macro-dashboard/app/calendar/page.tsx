@@ -96,6 +96,7 @@ export default function CalendarPage() {
   const [events, setEvents] = useState<EconomicEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [impactFilter, setImpactFilter] = useState<string[]>(['High', 'Medium']);
 
   useEffect(() => {
     async function fetchCalendar() {
@@ -113,6 +114,16 @@ export default function CalendarPage() {
     }
     fetchCalendar();
   }, []);
+
+  const toggleImpact = (impact: string) => {
+    setImpactFilter(prev => 
+      prev.includes(impact) 
+        ? prev.filter(i => i !== impact) 
+        : [...prev, impact]
+    );
+  };
+
+  const filteredEvents = events.filter(e => impactFilter.includes(e.importance));
 
   return (
     <main className="flex flex-col h-screen bg-surface-page overflow-hidden font-sans transition-colors duration-300">
@@ -152,8 +163,28 @@ export default function CalendarPage() {
           {/* Calendar List */}
           <div className="max-w-5xl mx-auto py-4 md:py-6 px-4 md:px-8">
             <div className="bg-surface-card border border-[#E5E7EB] dark:border-white/10 rounded-card shadow-sm overflow-hidden">
-              <div className="bg-[#F8FAFC] dark:bg-black/20 px-4 py-2 border-b border-[#E5E7EB] dark:border-white/5 flex justify-between items-center">
+              <div className="bg-[#F8FAFC] dark:bg-black/20 px-4 py-2 border-b border-[#E5E7EB] dark:border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                 <span className="text-[10px] font-bold text-[#020617] dark:text-[#ffffff] uppercase tracking-widest">Global Data Releases (Next 30 Days)</span>
+                
+                <div className="flex items-center gap-2">
+                  <span className="text-[9px] font-bold text-text-tertiary uppercase tracking-tighter mr-1">Filter Impact:</span>
+                  {['High', 'Medium', 'Low'].map((impact) => (
+                    <button
+                      key={impact}
+                      onClick={() => toggleImpact(impact)}
+                      className={cn(
+                        "px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all border",
+                        impactFilter.includes(impact)
+                          ? impact === 'High' ? "bg-semantic-negative text-white border-semantic-negative" :
+                            impact === 'Medium' ? "bg-accent-primary text-white border-accent-primary" :
+                            "bg-text-secondary text-white border-text-secondary"
+                          : "bg-transparent text-text-tertiary border-[#E5E7EB] dark:border-white/10 hover:border-text-tertiary"
+                      )}
+                    >
+                      {impact}
+                    </button>
+                  ))}
+                </div>
               </div>
               
               <div className="divide-y divide-[#F1F5F9] dark:divide-white/5">
@@ -166,12 +197,14 @@ export default function CalendarPage() {
                   <div className="p-20 text-center text-semantic-negative text-sm font-medium">
                     {error}
                   </div>
-                ) : events.length === 0 ? (
+                ) : filteredEvents.length === 0 ? (
                   <div className="p-20 text-center text-text-tertiary text-sm italic">
-                    No upcoming US releases found in the next 30 days.
+                    {events.length === 0 
+                      ? "No upcoming US releases found in the next 30 days."
+                      : "No events match the selected impact filters."}
                   </div>
                 ) : (
-                  events.map(event => (
+                  filteredEvents.map(event => (
                     <EventRow key={event.id} event={event} />
                   ))
                 )}
