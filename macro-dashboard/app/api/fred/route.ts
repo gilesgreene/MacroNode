@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+
+export const revalidate = 86400; // Revalidate daily
 import { fetchFredData } from '@/lib/fredClient';
 
 export async function GET(request: Request) {

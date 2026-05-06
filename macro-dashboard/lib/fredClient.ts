@@ -1,7 +1,7 @@
 import { FredObservation } from './types';
 
 const cache = new Map<string, { data: { observations: FredObservation[] }; timestamp: number }>();
-const TTL = 6 * 60 * 60 * 1000; // 6 hours in ms
+const TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
 
 export async function fetchFredData(seriesId: string, observationStart?: string): Promise<{ observations: FredObservation[] }> {
   const cacheKey = `${seriesId}-${observationStart || ''}`;

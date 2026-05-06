@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const revalidate = 86400; // Revalidate daily
+
 export async function GET() {
   const apiKey = process.env.FMP_API_KEY;
   if (!apiKey) {

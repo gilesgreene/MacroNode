@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const revalidate = 86400; // Revalidate daily
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const topic = searchParams.get('topic') || 'economy_macro';
