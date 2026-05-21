@@ -10,11 +10,26 @@ export function toYoY(obs: FredObservation[]): ChartPoint[] {
   const valid = filterValid(obs);
   const result: ChartPoint[] = [];
   
-  for (let i = 12; i < valid.length; i++) {
-    const current = valid[i];
-    const prevYear = valid[i - 12];
-    const yoyPct = ((current.value - prevYear.value) / prevYear.value) * 100;
-    result.push({ date: current.date, value: yoyPct });
+  const valueMap = new Map<string, number>();
+  for (const o of valid) {
+    const ym = o.date.substring(0, 7);
+    valueMap.set(ym, o.value);
+  }
+  
+  for (const current of valid) {
+    const parts = current.date.split('-');
+    if (parts.length !== 3) continue;
+    
+    const year = parseInt(parts[0], 10);
+    const month = parts[1];
+    
+    const prevYearMonthStr = `${year - 1}-${month}`;
+    const prevValue = valueMap.get(prevYearMonthStr);
+    
+    if (prevValue !== undefined) {
+      const yoyPct = ((current.value - prevValue) / prevValue) * 100;
+      result.push({ date: current.date, value: yoyPct });
+    }
   }
   return result;
 }
