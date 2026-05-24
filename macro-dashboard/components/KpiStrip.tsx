@@ -81,7 +81,7 @@ interface KpiStripProps {
 
 export default function KpiStrip({ items }: KpiStripProps) {
   return (
-    <div className="flex gap-2 w-full overflow-x-auto no-scrollbar pb-2 md:pb-0 shrink-0">
+    <div className="flex gap-2 w-full overflow-x-auto overflow-y-hidden no-scrollbar pb-2 md:pb-0 shrink-0">
       {items.map((item) => (
         <div key={item.tag} className="min-w-[160px] md:min-w-0 md:flex-1">
           <KpiCard
